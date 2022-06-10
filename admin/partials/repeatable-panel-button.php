@@ -1,7 +1,7 @@
 <?php
 $hidden_button_fields = true;
 
-if ( !empty( $this->field['super_simple_slider_slide_button_' .$button_count. '_text'] ) ) {
+if ( !empty( $this->field[$this->plugin_prefix.'_item_button_' .$button_count. '_text'] ) ) {
 	$hidden_button_fields = false;
 	$active_button_count++;
 }
@@ -17,17 +17,17 @@ if ( !empty( $this->field['super_simple_slider_slide_button_' .$button_count. '_
 		<div class="width-96">
 			<div class="three-column even">
 				<div class="column column-one">
-					<?php $this->create_super_simple_form_control( 'super_simple_slider_slide_button_' .$button_count. '_text', $this->repeatable_fieldset_settings ); ?>
+					<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_button_' .$button_count. '_text', $this->repeatable_fieldset_settings ); ?>
 				</div>
 				<div class="column column-two">
-					<?php $this->create_super_simple_form_control( 'super_simple_slider_slide_button_' .$button_count. '_link_content', $this->repeatable_fieldset_settings ); ?>
+					<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_button_' .$button_count. '_link_content', $this->repeatable_fieldset_settings ); ?>
 				</div>
 				<div class="column column-three">
-					<?php $this->create_super_simple_form_control( 'super_simple_slider_slide_button_' .$button_count. '_link_target', $this->repeatable_fieldset_settings ); ?>
+					<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_button_' .$button_count. '_link_target', $this->repeatable_fieldset_settings ); ?>
 				</div>
 			</div>
 			
-			<?php $this->create_super_simple_form_control( 'super_simple_slider_slide_button_' .$button_count. '_link_custom_url', $this->repeatable_fieldset_settings ); ?>
+			<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_button_button_' .$button_count. '_link_custom_url', $this->repeatable_fieldset_settings ); ?>
 		</div>
 		<div class="actions width-4">
 			<a href="#" class="delete-button icon" title="Delete this button">

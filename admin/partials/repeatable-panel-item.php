@@ -7,7 +7,7 @@
 	</td>
 	
 	<td class="image-container">
-		<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_image', $this->repeatable_fieldset_settings ); ?>
+		<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_image', $this->repeatable_fieldset_settings ); ?>
 	</td>
 	
 	<td class="width-65 no-padding">
@@ -22,8 +22,8 @@
 
 			<!-- Content -->
 			<div class="tab-content content active">
-				<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_title', $this->repeatable_fieldset_settings ); ?>
-				<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_text', $this->repeatable_fieldset_settings ); ?>
+				<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_title', $this->repeatable_fieldset_settings ); ?>
+				<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_text', $this->repeatable_fieldset_settings ); ?>
 
 				<ul class="buttons sortable">
 					<?php
@@ -33,7 +33,7 @@
 					
 					while ( $button_count < $max_buttons ) {
 						$button_count++;
-						//include( $this->parent->assets_dir .'/template-parts/repeatable-panel-button.php' );
+						include( plugin_dir_path( dirname( __FILE__ ) ).'/partials/repeatable-panel-button.php' );
 					}
 					?>
 					
@@ -45,8 +45,8 @@
 			
 			<!-- SEO -->
 			<div class="tab-content seo">
-				<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_image_alt', $this->repeatable_fieldset_settings ); ?>
-				<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_image_title', $this->repeatable_fieldset_settings ); ?>
+				<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_image_alt', $this->repeatable_fieldset_settings ); ?>
+				<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_image_title', $this->repeatable_fieldset_settings ); ?>
 			</div>
 			
 			<!-- Styling -->
@@ -54,15 +54,15 @@
 	
 				<ul class="fieldset">
 					<li>
-						<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_overlay_opacity', $this->repeatable_fieldset_settings ); ?>
+						<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_overlay_opacity', $this->repeatable_fieldset_settings ); ?>
 					</li>
 			
 					<li>
-						<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_text_overlay_opacity', $this->repeatable_fieldset_settings ); ?>
+						<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_text_overlay_opacity', $this->repeatable_fieldset_settings ); ?>
 					</li>
 					
 					<li>
-						<?php $this->create_super_simple_form_control( 'declicsweb_slide_item_text_overlay_text_shadow', $this->repeatable_fieldset_settings ); ?>
+						<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_text_overlay_text_shadow', $this->repeatable_fieldset_settings ); ?>
 					</li>
 				</ul>
 							

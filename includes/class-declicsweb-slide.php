@@ -66,17 +66,7 @@ class Declicsweb_Slide {
 	 *
 	 * @since    1.0.0
 	 */
-	public function np_declicsweb_slide_init() {
-		$args = array(
-			'public' => true,
-			'label' => 'Nivo Images',
-			'supports' => array(
-				'title',
-				'thumbnail'
-			)
-		);
-		register_post_type('np_images', $args);
-	}
+
 	public function __construct() {
 		
 		if ( defined( 'DECLICSWEB_SLIDE_VERSION' ) ) {

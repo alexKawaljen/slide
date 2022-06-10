@@ -97,9 +97,34 @@ class Declicsweb_Slide_Post_Type {
 	public $options;
 	
 	public $repeatable_fieldset_settings;
-	
+
+	/**
+	 * The name for POT file (language).
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      string
+	 */	
     public $namePot = 'declicsweb_slide';
 
+	/**
+	 * The string to strengten the wp_nonce_field (is used to validate that the contents of the form came from the location on the current site and not somewhere else) 
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string
+	 */	
+
+	private $wp_nonce_field_token = 'declicsweb_slide'; // could be an array of 2 parameters
+
+	/**
+	 * Set the plugin name to variable to re-use code
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      string
+	 */	
+	public $plugin_prefix = 'declicsweb_slide'; 
 	/**
 	 * Constructor
 	 *
@@ -110,144 +135,12 @@ class Declicsweb_Slide_Post_Type {
 	 * @param array  $options Post type options.
 	 */
 	public function __construct( $parent, $post_type = '', $single = '', $description = '', $options = array() ) {
-        
-        // OLD
+
         $this->parent = $parent;
 		
 		// if ( ! $post_type || ! $single ) {
 		// 	return;
 		// }
-		
-		$this->settings = array(
-			'repeatable' => false,
-			'fields' => array(
-				'declicsweb_slide_has_min_width' => array(
-					'type'			=> 'checkbox',
-					'default'		=> false,
-					'hasDependents'	=> true,
-					'class'			=> '',
-					'description'	=> __( 'Slider has a minimum width', $this->namePot ),
-				),
-				'declicsweb_slide_min_width' => array(
-					'type'			=> 'pixels',
-					'placeholder'	=> '',
-					'suffix'		=> 'px',
-					'class'			=> 'full-width',
-					'default'		=> 600,
-				),
-				'declicsweb_slide_speed' => array(
-					'label'			=> __( 'Transition Speed', $this->namePot ),
-					'type'			=> 'milliseconds',
-					'placeholder'	=> '',
-					'suffix'		=> 'ms',
-					'class'			=> 'full-width',
-					'default'		=> 450,
-					'description' => __( 'The speed it takes to transition between slides in milliseconds. 1000 milliseconds equals 1 second.', 'declicsweb_slide' )
-				)
-			)
-		);
-		
-		$this->repeatable_fieldset_settings = array(
-			'repeatable' => true,
-			'fields' => array(
-				'declicsweb_slide_item_image' => array(
-					'type'			=> 'media_upload',
-					'class'			=> '',
-					'description'	=> '',
-				),
-				'declicsweb_slide_item_title' => array(
-					'type'			=> 'text',
-					'placeholder'	=> __( 'Heading', $this->namePot ),
-					'class'			=> '',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_text' => array(
-					'type'			=> 'html',
-					'placeholder'	=> __( 'Text', $this->namePot ),
-					'class'			=> '',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_button_1_text' => array(
-					'type'			=> 'text',
-					'placeholder'	=> __( 'Button Text', $this->namePot ),
-					'class'			=> 'full-width text',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_button_1_link_content' => array(
-					'type'			=> 'dropdown_pages_posts',
-					'class'			=> 'full-width link_content',
-					'description' => ''
-				),
-				'declicsweb_slide_item_button_1_link_target' => array(
-					'type'			=> 'select',
-					'options'		=> array(
-						'' 			  => __( 'Open the link in...', $this->namePot ),
-						'same-window' => __( 'The Same Window', $this->namePot ),
-						'new-window'  => __( 'A New Window', $this->namePot )
-					),
-					'placeholder'	=> '',
-					'class'			=> 'full-width link_target',
-					'default'		=> 'placeholder'
-				),
-				'declicsweb_slide_item_button_1_link_custom_url' => array(
-					'type'			=> 'url',
-					'placeholder'	=> __( 'Add a URL to link to', $this->namePot ),
-					'class'			=> 'full-with link_custom_url',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_image_title' => array(
-					'type'			=> 'text',
-					'placeholder'	=> __( 'Image Title Text', $this->namePot ),
-					'class'			=> '',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_image_alt' => array(
-					'type'			=> 'text',
-					'placeholder'	=> __( 'Image Alt Text', $this->namePot ),
-					'class'			=> '',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_overlay_opacity' => array(
-					'label'			=> __( 'Overlay Opacity', $this->namePot ),
-					'type'			=> 'range',
-					'default'		=> 0,
-					'show_labels'	=> true,
-					'min_labels' 	=> true,
-			    	'input_attrs' => array(
-			    		'min'   => 0,
-			    		'max'   => 1,
-			    		'step'  => 0.1,
-			    		'style' => 'color: #000000',
-			    	),
-					'placeholder'	=> '',
-					'class'			=> '',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_text_overlay_opacity' => array(
-					'label'			=> __( 'Text Overlay Opacity', $this->namePot ),
-					'type'			=> 'range',
-					'default'		=> 0.3,
-					'show_labels'	=> true,
-					'min_labels' 	=> true,
-			    	'input_attrs' => array(
-			    		'min'   => 0,
-			    		'max'   => 1,
-			    		'step'  => 0.1,
-			    		'style' => 'color: #000000',
-			    	),
-					'placeholder'	=> '',
-					'class'			=> '',
-					'description'	=> ''
-				),
-				'declicsweb_slide_item_text_overlay_text_shadow' => array(
-					'label'			=> __( 'Text Shadow', $this->namePot ),
-					'type'			=> 'checkbox',
-					'default'		=> false,
-					'class'			=> '',
-					'description' 	=> __( 'Display a drop shadow on the text overlay text', $this->namePot ),
-				)
-			)
-		);
 
 		// Post type name and labels.
 		$this->post_type   = $post_type;
@@ -257,8 +150,8 @@ class Declicsweb_Slide_Post_Type {
 		$this->options     = $options;
 
 		// Regsiter post type.
-		add_action( 'init', array( $this, 'main_register_post_type' ));
-        //$this->loader->add_action('init', $this->loader'np_declicsweb_slide_init', null);
+		add_action( 'init', array( $this, 'construct_register_post_type' ));
+        //$this->loader->add_action('init', array( $this, 'main_register_post_type' ), null);
 
 		// // Add custom meta boxes
 		add_action( 'admin_init', array( $this, 'add_meta_boxes' ) );
@@ -267,81 +160,29 @@ class Declicsweb_Slide_Post_Type {
 		// add_action( 'save_post_declicsweb_slide', array( $this, 'save_global_settings_meta' ) );
 
 		// // Register shortcodes
-		// add_shortcode( 'ssslider', array( $this, 'super_simple_slider_shortcode' ) );
-		// add_shortcode( 'declicsweb_slide', array( $this, 'super_simple_slider_shortcode' ) );
+		 add_shortcode( $this->plugin_prefix, array( $this, 'declicsweb_slide_shortcode' ) );
 
 		// // Display custom update messages for posts edits.
 		// add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
 		// add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_updated_messages' ), 10, 2 );
 	}
 
-	/**
-	 * Register new post type
-	 *
-	 * @return void
-	 */
-	public function main_register_post_type() {
-        // Create the Custom Post Type and a Taxonomy for the 'declicsweb_slide' Post Type
-        
-		$labels = array(
-            'label'              => $this->single,
-            'name_admin_bar'     => $this->single,
-			'name'               => $this->single,
-			'singular_name'      => $this->single,
-			'name_admin_bar'     => $this->single,
-			'add_new'            => _x( 'Add New', $this->post_type, $this->namePot ),
-			'add_new_item'       => sprintf( __( 'Add New %s', $this->namePot ), $this->single ),
-			'edit_item'          => sprintf( __( 'Edit %s', $this->namePot ), $this->single ),
-			'new_item'           => sprintf( __( 'New %s', $this->namePot ), $this->single ),
-			'all_items'          => sprintf( __( 'All %s', $this->namePot ), $this->single ),
-			'view_item'          => sprintf( __( 'View %s', $this->namePot ), $this->single ),
-			'search_items'       => sprintf( __( 'Search %s', $this->namePot ), $this->single ),
-			'not_found'          => sprintf( __( 'No %s Found', $this->namePot ), $this->single ),
-			'not_found_in_trash' => sprintf( __( 'No %s Found In Trash', $this->namePot ), $this->single ),
-			'parent_item_colon'  => sprintf( __( 'Parent %s' ), $this->single ),
-			'menu_name'          => $this->single,
-		);
-		//phpcs:enable
-
-		$args = array(
-			'labels'                => apply_filters( $this->post_type . '_labels', $labels ),
-			'description'           => $this->description,
-			'public'                => true,
-			'publicly_queryable'    => true,
-			'exclude_from_search'   => false,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'show_in_nav_menus'     => true,
-			'query_var'             => true,
-			'can_export'            => true,
-			'rewrite'               => true,
-			'capability_type'       => 'post',
-			'has_archive'           => false,
-			'hierarchical'          => false,
-			'show_in_rest'          => true,
-			'rest_base'             => $this->post_type,
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-			'supports'              => array( 'title' ),
-			'menu_position'         => 81,
-			//'menu_icon'             => 'dashicons-admin-post',
-		);
-
-		$args = array_merge( $args, $labels );
-        register_post_type($this->post_type, $args);
-
-		//register_post_type( $this->post_type, apply_filters( $this->post_type . '_register_args', $args, $this->post_type ) );
-	}
 
 	/*
 	* Setup custom meta boxes
 	*/
 	public function add_meta_boxes() {
-		// Create the Slide Meta Boxes
-		add_meta_box( 'declicsweb-slide-slide-settings-group', __( 'Slides', $this->namePot ), array( $this, 'create_slide_settings_meta_box' ), $this->post_type, 'normal', 'default' );
+
+		// create the data fields
+		$this->construct_repeatable_fieldset_settings();
+		$this->construct_meta_data_settings();	
+
+		// Create the Items Meta Boxes
+		add_meta_box( $this->plugin_prefix.'-item-settings-group', __( 'Slides', $this->namePot ), array( $this, 'create_item_settings_meta_box' ), $this->post_type, 'normal', 'default' );
 		//add_filter( 'postbox_classes_super-simple-slider_super-simple-slider-slide-settings-group', array( $this, 'add_metabox_classes' ) );
-		
+			
 		// Create the Shortcode Meta Box
-		add_meta_box( 'declicsweb-slider-shortcode-group', __( 'Shortcode', $this->namePot ), array( $this, 'create_shortcode_meta_box' ), $this->post_type, 'side', 'high' );
+		add_meta_box( $this->plugin_prefix.'-shortcode-group', __( 'Shortcode', $this->namePot ), array( $this, 'create_shortcode_meta_box' ), $this->post_type, 'side', 'high' );
 		
 		// Create the Global Settings Meta Box
 		//add_meta_box( 'declicsweb-slider-global-settings-group', __( 'Global Settings', $this->namePot ), array( $this, 'create_global_settings_meta_box' ), $this->post_type, 'side', 'default' );
@@ -350,17 +191,17 @@ class Declicsweb_Slide_Post_Type {
 	/*
 	* Create repeatable slide fieldset
 	*/
-	public function create_slide_settings_meta_box() {
+	public function create_item_settings_meta_box() {
 		global $post;
 		
-		$slide_settings = get_post_meta( $post->ID, 'super-simple-slider-slide-settings-group', true );
+		$slide_settings = get_post_meta( $post->ID, $this->plugin_prefix.'-item-settings-group', true );
 
-		wp_nonce_field( 'otb_repeater_nonce', 'otb_repeater_nonce' );
+		wp_nonce_field( $this->wp_nonce_field_token, $this->wp_nonce_field_token );
 		?>
 		
-		<div class="otb-postbox-container">
+		<div class="<?php echo $this->plugin_prefix; ?>-postbox-container">
 
-			<table class="otb-panel-container multi sortable repeatable" width="100%" cellpadding="0" cellspacing="0" border="0">
+			<table class="<?php echo $this->plugin_prefix; ?>panel-container multi sortable repeatable" width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tbody class="container">
 					<?php
 					// $hidden_panel = false;
@@ -368,18 +209,18 @@ class Declicsweb_Slide_Post_Type {
 					if ( $slide_settings ) :
 						foreach ( $slide_settings as $setting ) {
 							$this->field = $setting;
-							include(plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/repeatable-panel-slide.php' );
+							include(plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/repeatable-panel-item.php' );
 						}
 					else : 
 						// show a blank one
-						include( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/repeatable-panel-slide.php' );
+						include( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/repeatable-panel-item.php' );
 					endif;
 					
 					$this->field = null;
 					
 					// Empty hidden panel used for creating a new panel
 					$hidden_panel = true;
-					include( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/repeatable-panel-slide.php' );
+					include( plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/repeatable-panel-item.php' );
 					?>
 				</tbody>
 			</table>
@@ -396,7 +237,7 @@ class Declicsweb_Slide_Post_Type {
 	}
 	
 	public function add_metabox_classes( $classes ) {
-		array_push( $classes, 'otb-postbox', 'seamless' );
+		array_push( $classes, $this->plugin_prefix.'-postbox', 'seamless' );
 		return $classes;
 	}
 	
@@ -406,7 +247,7 @@ class Declicsweb_Slide_Post_Type {
 	public function create_global_settings_meta_box() {
 		global $post;
 		
-		//include( $this->parent->assets_dir .'/admin/partials/global-settings.php' );
+		include( plugin_dir_path( dirname( __FILE__ ) ).'/admin/partials/global-settings.php' );
 	}
 	
 	/*
@@ -416,10 +257,10 @@ class Declicsweb_Slide_Post_Type {
 		global $post;
 	?>
 		<div class="text-input-with-button-container copyable">
-			<input name="super_simple_slider_shortcode" value="<?php esc_html_e( '[ssslider id="' . $post->ID . '"]' ); ?>" readonly />
-			<div class="icon copy">
-				<i class="sss-fa sss-fa-copy"></i>
-			</div>
+			<input name="<?php echo $this->plugin_prefix; ?>_shortcode" value="<?php esc_html_e( '['.$this->plugin_prefix.' id="' . $post->ID . '"]' ); ?>" readonly />
+			<!-- <div class="icon copy">
+				<i class=""></i>
+			</div>  -->
 			<div class="message"><?php esc_html_e( 'Copied to clipboard', $this->namePot ); ?></div>
 		</div>
 	<?php
@@ -429,7 +270,7 @@ class Declicsweb_Slide_Post_Type {
 	* Save slides meta
 	*/
 	public function save_slides_meta( $post_id ) {
-		if ( !isset( $_POST['otb_repeater_nonce'] ) || !wp_verify_nonce( $_POST['otb_repeater_nonce'], 'otb_repeater_nonce' ) )
+		if ( !isset( $_POST[$this->wp_nonce_field_token] ) || !wp_verify_nonce( $_POST[$this->wp_nonce_field_token], $this->wp_nonce_field_token ) )
 			return;
 		
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
@@ -438,7 +279,7 @@ class Declicsweb_Slide_Post_Type {
 		if ( !current_user_can( 'edit_post', $post_id ) )
 			return;
 
-		$sss_old = get_post_meta( $post_id, 'super-simple-slider-slide-settings-group', true );
+		$sss_old = get_post_meta( $post_id, $this->plugin_prefix.'-item-settings-group', true );
 		$sss_new = array();
 		
 		$repeatable_fieldset_settings = $this->repeatable_fieldset_settings['fields'];
@@ -453,9 +294,9 @@ class Declicsweb_Slide_Post_Type {
         }
         
 		if ( !empty( $sss_new ) && $sss_new != $sss_old ) {
-			update_post_meta( $post_id, 'super-simple-slider-slide-settings-group', $sss_new );
+			update_post_meta( $post_id, $this->plugin_prefix.'-item-settings-group', $sss_new );
 		} elseif ( empty( $sss_new ) && $sss_old ) {
-			delete_post_meta( $post_id, 'super-simple-slider-slide-settings-group', $sss_old );
+			delete_post_meta( $post_id, $this->plugin_prefix.'-item-settings-group', $sss_old );
 		}
 	}
 	
@@ -463,7 +304,7 @@ class Declicsweb_Slide_Post_Type {
 	* Save global settings meta
 	*/
 	public function save_global_settings_meta( $post_id ) {
-		if ( !isset( $_POST['otb_repeater_nonce'] ) || !wp_verify_nonce( $_POST['otb_repeater_nonce'], 'otb_repeater_nonce' ) )
+		if ( !isset( $_POST[$this->wp_nonce_field_token] ) || !wp_verify_nonce( $_POST[$this->wp_nonce_field_token], $this->wp_nonce_field_token ) )
 			return;
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
@@ -488,7 +329,7 @@ class Declicsweb_Slide_Post_Type {
 	}
 	
 	/* Utility function for creating form controls */
-	public function create_super_simple_form_control( $id, $settings ) {
+	public function create_dcs_form_control( $id, $settings ) {
 		global $post;
 		
 		$value = '';
@@ -599,7 +440,7 @@ class Declicsweb_Slide_Post_Type {
 	/**
 	 * Create Slider Shortcode
 	 */
-	function super_simple_slider_shortcode( $atts ) {
+	function declicsweb_slide_shortcode( $atts ) {
 		// Extract attributes passed to shortcode
 		extract( shortcode_atts( array(
 			'id' => ''
@@ -664,6 +505,205 @@ class Declicsweb_Slide_Post_Type {
 
 		return $bulk_messages;
 	}
+
+
+
+
+	// CUSTUM DATAS FOR THE PLUGIN
+	/**
+	 * Register new post type, the postype aka the parent object the plugin will create
+	 *
+	 * @return void
+	 */
+	public function construct_register_post_type() {
+        // Create the Custom Post Type and a Taxonomy for the 'declicsweb_slide' Post Type
+        
+		$labels = array(
+            'label'              => $this->single,
+            'name_admin_bar'     => $this->single,
+			'name'               => $this->single,
+			'singular_name'      => $this->single,
+			'name_admin_bar'     => $this->single,
+			'add_new'            => _x( 'Add New', $this->post_type, $this->namePot ),
+			'add_new_item'       => sprintf( __( 'Add New %s', $this->namePot ), $this->single ),
+			'edit_item'          => sprintf( __( 'Edit %s', $this->namePot ), $this->single ),
+			'new_item'           => sprintf( __( 'New %s', $this->namePot ), $this->single ),
+			'all_items'          => sprintf( __( 'All %s', $this->namePot ), $this->single ),
+			'view_item'          => sprintf( __( 'View %s', $this->namePot ), $this->single ),
+			'search_items'       => sprintf( __( 'Search %s', $this->namePot ), $this->single ),
+			'not_found'          => sprintf( __( 'No %s Found', $this->namePot ), $this->single ),
+			'not_found_in_trash' => sprintf( __( 'No %s Found In Trash', $this->namePot ), $this->single ),
+			'parent_item_colon'  => sprintf( __( 'Parent %s' ), $this->single ),
+			'menu_name'          => $this->single,
+		);
+		//phpcs:enable
+
+		$args = array(
+			'labels'                => apply_filters( $this->post_type . '_labels', $labels ),
+			'description'           => $this->description,
+			'public'                => true,
+			'publicly_queryable'    => true,
+			'exclude_from_search'   => false,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'show_in_nav_menus'     => true,
+			'query_var'             => true,
+			'can_export'            => true,
+			'rewrite'               => true,
+			'capability_type'       => 'post',
+			'has_archive'           => false,
+			'hierarchical'          => false,
+			'show_in_rest'          => true,
+			'rest_base'             => $this->post_type,
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
+			'supports'              => array( 'title' ),
+			'menu_position'         => 81,
+			//'menu_icon'             => 'dashicons-admin-post',
+		);
+
+		$args = array_merge( $args, $labels );
+		register_post_type($this->post_type, $args);
+		//register_post_type( $this->post_type, apply_filters( $this->post_type . '_register_args', $args, $this->post_type ) );
+	}
+
+
+	public function construct_meta_data_settings (){
+
+		$this->settings = array(
+			'repeatable' => false,
+			'fields' => array(
+				$this->plugin_prefix.'_has_min_width' => array(
+					'type'			=> 'checkbox',
+					'default'		=> false,
+					'hasDependents'	=> true,
+					'class'			=> '',
+					'description'	=> __( 'Slider has a minimum width', $this->namePot ),
+				),
+				$this->plugin_prefix.'_min_width' => array(
+					'type'			=> 'pixels',
+					'placeholder'	=> '',
+					'suffix'		=> 'px',
+					'class'			=> 'full-width',
+					'default'		=> 600,
+				),
+				$this->plugin_prefix.'_speed' => array(
+					'label'			=> __( 'Transition Speed', $this->namePot ),
+					'type'			=> 'milliseconds',
+					'placeholder'	=> '',
+					'suffix'		=> 'ms',
+					'class'			=> 'full-width',
+					'default'		=> 450,
+					'description' => __( 'The speed it takes to transition between slides in milliseconds. 1000 milliseconds equals 1 second.',  $this->namePot )
+				)
+			)
+		);		
+	}
+
+	public function construct_repeatable_fieldset_settings (){
+		
+		$this->repeatable_fieldset_settings = array(
+			'repeatable' => true,
+			'fields' => array(
+				$this->plugin_prefix.'_item_image' => array(
+					'type'			=> 'media_upload',
+					'class'			=> '',
+					'description'	=> '',
+				),
+				$this->plugin_prefix.'_item_title' => array(
+					'type'			=> 'text',
+					'placeholder'	=> __( 'Heading', $this->namePot ),
+					'class'			=> '',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_text' => array(
+					'type'			=> 'html',
+					'placeholder'	=> __( 'Text', $this->namePot ),
+					'class'			=> '',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_button_1_text' => array(
+					'type'			=> 'text',
+					'placeholder'	=> __( 'Button Text', $this->namePot ),
+					'class'			=> 'full-width text',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_button_1_link_content' => array(
+					'type'			=> 'dropdown_pages_posts',
+					'class'			=> 'full-width link_content',
+					'description' => ''
+				),
+				$this->plugin_prefix.'_item_button_1_link_target' => array(
+					'type'			=> 'select',
+					'options'		=> array(
+						'' 			  => __( 'Open the link in...', $this->namePot ),
+						'same-window' => __( 'The Same Window', $this->namePot ),
+						'new-window'  => __( 'A New Window', $this->namePot )
+					),
+					'placeholder'	=> '',
+					'class'			=> 'full-width link_target',
+					'default'		=> 'placeholder'
+				),
+				$this->plugin_prefix.'_item_button_1_link_custom_url' => array(
+					'type'			=> 'url',
+					'placeholder'	=> __( 'Add a URL to link to', $this->namePot ),
+					'class'			=> 'full-with link_custom_url',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_image_title' => array(
+					'type'			=> 'text',
+					'placeholder'	=> __( 'Image Title Text', $this->namePot ),
+					'class'			=> '',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_image_alt' => array(
+					'type'			=> 'text',
+					'placeholder'	=> __( 'Image Alt Text', $this->namePot ),
+					'class'			=> '',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_overlay_opacity' => array(
+					'label'			=> __( 'Overlay Opacity', $this->namePot ),
+					'type'			=> 'range',
+					'default'		=> 0,
+					'show_labels'	=> true,
+					'min_labels' 	=> true,
+			    	'input_attrs' => array(
+			    		'min'   => 0,
+			    		'max'   => 1,
+			    		'step'  => 0.1,
+			    		'style' => 'color: #000000',
+			    	),
+					'placeholder'	=> '',
+					'class'			=> '',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_text_overlay_opacity' => array(
+					'label'			=> __( 'Text Overlay Opacity', $this->namePot ),
+					'type'			=> 'range',
+					'default'		=> 0.3,
+					'show_labels'	=> true,
+					'min_labels' 	=> true,
+			    	'input_attrs' => array(
+			    		'min'   => 0,
+			    		'max'   => 1,
+			    		'step'  => 0.1,
+			    		'style' => 'color: #000000',
+			    	),
+					'placeholder'	=> '',
+					'class'			=> '',
+					'description'	=> ''
+				),
+				$this->plugin_prefix.'_item_text_overlay_text_shadow' => array(
+					'label'			=> __( 'Text Shadow', $this->namePot ),
+					'type'			=> 'checkbox',
+					'default'		=> false,
+					'class'			=> '',
+					'description' 	=> __( 'Display a drop shadow on the text overlay text', $this->namePot ),
+				)
+			)
+		);
+	}
+
 	
 	/**
 	 * Main Super_Simple_Slider_Post_Type Instance

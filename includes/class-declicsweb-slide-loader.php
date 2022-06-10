@@ -135,7 +135,7 @@ class Declicsweb_Slide_Loader {
 	public function register_post_type_actions() {
 		$parent = 'test'; // @TODO
 		$post_type = 'declicsweb_images';
-        $name    = __( 'Declicsweb_Slide', 'declicsweb_slide' );
+        $name    =  'Declicsweb_Slide';
 
 		$post_type = new Declicsweb_Slide_Post_Type('test', $post_type, $name, '');
 		

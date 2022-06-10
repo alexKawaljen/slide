@@ -23,9 +23,18 @@
  * @package    Declicsweb_Slide
  * @subpackage declicsweb-slide/includes
  * @author     Alex P <declicsweb@gmail.com>
+ * 
  */
-class Declicsweb_Slide_i18n {
 
+class Declicsweb_Slide_i18n {
+	/**
+	 * The name for POT file (language).
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      string
+	 */	
+    public $namePot = 'declicsweb_slide';
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -35,7 +44,7 @@ class Declicsweb_Slide_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'declicsweb-slide',
+			$this->namePot,
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

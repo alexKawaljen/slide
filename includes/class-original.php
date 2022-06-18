@@ -2,7 +2,7 @@
 /**
  * Main plugin class file.
  *
- * @package Super Simple Slider/Includes
+ * @package Slider/Includes
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main plugin class.
  */
-class Super_Simple_Slider {
+class Slider_plugin {
 
 	/**
-	 * The single instance of Super_Simple_Slider.
+	 * The single instance of Slider_plugin.
 	 *
 	 * @var     object
 	 * @access  private
@@ -24,9 +24,9 @@ class Super_Simple_Slider {
 	private static $_instance = null; //phpcs:ignore
 
 	/**
-	 * Local instance of Super_Simple_Slider_Admin_API
+	 * Local instance of Slider_plugin_Admin_API
 	 *
-	 * @var Super_Simple_Slider_Admin_API|null
+	 * @var Slider_plugin_Admin_API|null
 	 */
 	public $admin = null;
 
@@ -40,7 +40,7 @@ class Super_Simple_Slider {
 	public $settings = null;
 	
 	/**
-	 * Super_Simple_Slider_Post_Type class object
+	 * Slider_plugin_Post_Type class object
 	 *
 	 * @var     object
 	 * @access  public
@@ -201,7 +201,7 @@ class Super_Simple_Slider {
 		//add_action( 'admin_menu', array( $this, 'add_our_themes_menu' ) );
 		
 		// Add a link to the plugin listing on the Installed Plugins page
-		add_filter( 'plugin_action_links_' . plugin_basename( $this->file ) , array( $this, 'add_link_to_plugin_listing' ) );
+		//add_filter( 'plugin_action_links_' . plugin_basename( $this->file ) , array( $this, 'add_link_to_plugin_listing' ) );
 	}
 	
 	public function show_notification_bubble( $menu ) {
@@ -247,7 +247,7 @@ class Super_Simple_Slider {
 	 * @param array  $post_types Post types to register this taxonomy for.
 	 * @param array  $taxonomy_args Taxonomy arguments.
 	 *
-	 * @return bool|string|Super_Simple_Slider_Taxonomy
+	 * @return bool|string|Slider_plugin_Taxonomy
 	 */
 	public function register_taxonomy( $taxonomy = '', $plural = '', $single = '', $post_types = array(), $taxonomy_args = array() ) {
 
@@ -255,7 +255,7 @@ class Super_Simple_Slider {
 			return false;
 		}
 
-		$taxonomy = new Super_Simple_Slider_Taxonomy( $taxonomy, $plural, $single, $post_types, $taxonomy_args );
+		$taxonomy = new Slider_plugin_Taxonomy( $taxonomy, $plural, $single, $post_types, $taxonomy_args );
 
 		return $taxonomy;
 	}
@@ -446,15 +446,15 @@ class Super_Simple_Slider {
 	}
 	
 	/**
-	 * Main Super_Simple_Slider Instance
+	 * Main Slider_plugin Instance
 	 *
-	 * Ensures only one instance of Super_Simple_Slider is loaded or can be loaded.
+	 * Ensures only one instance of Slider_plugin is loaded or can be loaded.
 	 *
 	 * @param string $file File instance.
 	 * @param string $version Version parameter.
 	 *
-	 * @return Object Super_Simple_Slider instance
-	 * @see Super_Simple_Slider()
+	 * @return Object Slider_plugin instance
+	 * @see Slider_plugin()
 	 * @since 1.0.0
 	 * @static
 	 */

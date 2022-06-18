@@ -387,7 +387,7 @@ class Declicsweb_Slide_Form_Control {
 				}
 				
 				$html .= '<div class="media-uploader ' .$media_uploader_class. '">';
-				$html .= '<p class="hide-if-no-js"><a title="' . esc_attr__( 'Upload Image', $this->namePot ) . '" href="javascript:;" class="button upload" data-uploader_title="' . esc_attr__( 'Upload Image', $this->namePot ) . '" data-uploader_button_text="' . esc_attr__( 'Upload Image', $this->namePot ) . '">' . esc_html__( 'Upload Image', $this->namePot ) . '</a></p>';				
+				$html .= '<p class="hide-if-no-js"><a title="' . esc_attr__( 'Upload Image', $this->namePot ) . '" class="button upload" data-uploader_title="' . esc_attr__( 'Upload Image', $this->namePot ) . '" data-uploader_button_text="' . esc_attr__( 'Upload Image', $this->namePot ) . '">' . esc_html__( 'Upload Image', $this->namePot ) . '</a></p>';				
 				$html .= '<input type="hidden" name="' . esc_attr( $field_name ) . '" data-field-id="' .$this->id. '" value="' . esc_attr( $image_id ) . '" />';
 				
 				$html .= '<div class="preview">';

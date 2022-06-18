@@ -27,9 +27,9 @@ class Declicsweb_Slide_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $declicsweb_slide    The ID of this plugin.
+	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
-	private $declicsweb_slide;
+	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -41,16 +41,26 @@ class Declicsweb_Slide_Public {
 	private $version;
 
 	/**
+	 * Suffix for JavaScripts & CSS
+	 *
+	 * @var     string
+	 * @access  public
+	 * @since   1.0.0
+	 */
+	public $script_suffix;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $declicsweb_slide       The name of the plugin.
+	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $declicsweb_slide, $version ) {
+	public function __construct( $plugin_name, $version ) {
 
-		$this->declicsweb_slide = $declicsweb_slide;
+		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->script_suffix = defined( 'DECLICSWEB_SLIDE_DEBUG' ) && DECLICSWEB_SLIDE_DEBUG ? '' : '.min';
 
 	}
 
@@ -73,7 +83,7 @@ class Declicsweb_Slide_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->declicsweb_slide, plugin_dir_url( __FILE__ ) . 'css/declicsweb-slide-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/declicsweb-slide-public' . $this->script_suffix . '.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +106,7 @@ class Declicsweb_Slide_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->declicsweb_slide, plugin_dir_url( __FILE__ ) . 'js/declicsweb-slide-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/declicsweb-slide-public' . $this->script_suffix . '.js', array( 'jquery' ), $this->version, false );
 
 	}
 

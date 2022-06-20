@@ -163,8 +163,8 @@ class Declicsweb_Slide_Post_Type {
 		 add_shortcode( $this->plugin_prefix, array( $this, 'declicsweb_slide_shortcode' ) );
 
 		// // Display custom update messages for posts edits.
-		// add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
-		// add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_updated_messages' ), 10, 2 );
+		 add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
+		add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_updated_messages' ), 10, 2 );
 	}
 
 
@@ -185,7 +185,7 @@ class Declicsweb_Slide_Post_Type {
 		add_meta_box( $this->plugin_prefix.'-shortcode-group', __( 'Shortcode', $this->namePot ), array( $this, 'create_shortcode_meta_box' ), $this->post_type, 'side', 'high' );
 		
 		// Create the Global Settings Meta Box
-		//add_meta_box( 'declicsweb-slider-global-settings-group', __( 'Global Settings', $this->namePot ), array( $this, 'create_global_settings_meta_box' ), $this->post_type, 'side', 'default' );
+		add_meta_box( 'declicsweb-slider-global-settings-group', __( 'Global Settings', $this->namePot ), array( $this, 'create_global_settings_meta_box' ), $this->post_type, 'side', 'default' );
 	}
 
 	/*
@@ -270,14 +270,14 @@ class Declicsweb_Slide_Post_Type {
 	* Save slides meta
 	*/
 	public function save_slides_meta( $post_id ) {
-		if ( !isset( $_POST[$this->wp_nonce_field_token] ) || !wp_verify_nonce( $_POST[$this->wp_nonce_field_token], $this->wp_nonce_field_token ) )
-			return;
+		// if ( !isset( $_POST[$this->wp_nonce_field_token] ) || !wp_verify_nonce( $_POST[$this->wp_nonce_field_token], $this->wp_nonce_field_token ) )
+		// 	return;
 		
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-			return;
+		// if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		// 	return;
 
-		if ( !current_user_can( 'edit_post', $post_id ) )
-			return;
+		// if ( !current_user_can( 'edit_post', $post_id ) )
+		// 	return;
 
 		$sss_old = get_post_meta( $post_id, $this->plugin_prefix.'-item-settings-group', true );
 		$sss_new = array();

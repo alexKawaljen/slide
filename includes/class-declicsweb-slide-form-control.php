@@ -458,4 +458,7 @@ class Declicsweb_Slide_Form_Control {
 		
 		echo $html;
 	}
+
+
+	
 }

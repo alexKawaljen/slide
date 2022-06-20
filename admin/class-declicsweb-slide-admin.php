@@ -107,7 +107,7 @@ class Declicsweb_Slide_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/declicsweb-slide-admin' . $this->script_suffix . '.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_media();
 	}
 
 }

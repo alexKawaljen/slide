@@ -2,15 +2,15 @@
 
 <tr class="panel <?php echo ( $hidden_panel ? 'hidden' : '' ); ?>">
 
-	<td class="sort-handle">
+	<!-- <td class="sort-handle">
 		<i class="icon sss-fa sss-fa-arrows"></i>
-	</td>
+	</td> -->
 	
 	<td class="image-container">
 		<?php $this->create_dcs_form_control( $this->plugin_prefix.'_item_image', $this->repeatable_fieldset_settings ); ?>
 	</td>
 	
-	<td class="width-65 no-padding">
+	<td class="no-padding">
 		
 		<!-- Tabs -->
 		<div class="otb-tabs-container">
@@ -73,8 +73,8 @@
 	
 	<td class="remove-repeatable-panel">
 		<a href="#" class="icon" title="Delete this slide">
-			<i class="sss-fa sss-fa-times"></i>
-		</a>
+			<!-- <i class="sss-fa sss-fa-times"></i>-->
+		</a> 
 	</td>
 	
 </tr>

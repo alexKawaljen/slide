@@ -196,7 +196,7 @@ class Slider_plugin {
 		add_action( 'init', array( $this, 'load_localisation' ), 0 );
 		
 		// Load the widget
-		add_action( 'widgets_init', array( $this, 'load_custom_widgets' ) );
+		//add_action( 'widgets_init', array( $this, 'load_custom_widgets' ) );
 		
 		//add_action( 'admin_menu', array( $this, 'add_our_themes_menu' ) );
 		

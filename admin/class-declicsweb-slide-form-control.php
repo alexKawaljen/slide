@@ -392,11 +392,11 @@ class Declicsweb_Slide_Form_Control {
 				
 				$html .= '<div class="preview">';
 				$html .= '<div class="delete icon">';
-				$html .= '<i class="sss-fa sss-fa-times"></i>';		
+				//$html .= '<i class="sss-fa sss-fa-times"></i>';		
 				$html .= '</div>';
 				
 				if ( $has_image ) {
-					$thumbnail_html = wp_get_attachment_image( $image_id, 'full' );
+					$thumbnail_html = wp_get_attachment_image( $image_id );
 
 					if ( !empty( $thumbnail_html ) ) {
 						$html .= $thumbnail_html;
@@ -447,7 +447,7 @@ class Declicsweb_Slide_Form_Control {
 			
 			case 'repeatable_fieldset':
 				ob_start();
-				include ( super_simple_slider()->assets_dir .'/template-parts/'. $this->template );
+				//include ( super_simple_slider()->assets_dir .'/template-parts/'. $this->template );
 				$html .= ob_get_clean();
 			break;
 		}

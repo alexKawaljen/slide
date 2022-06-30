@@ -127,11 +127,11 @@ class Declicsweb_Slide {
 		/**
 		 * The class responsible for defining all post type @TODO should be in loader.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-declicsweb-slide-post-type.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-declicsweb-slide-post-type.php';
 		/**
 		 * The class responsible for forms.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-declicsweb-slide-form-control.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-declicsweb-slide-form-control.php';
 
 
 		$this->loader = new Declicsweb_Slide_Loader();

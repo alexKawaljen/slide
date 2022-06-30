@@ -31,7 +31,7 @@ if ( !empty( $this->field[$this->plugin_prefix.'_item_button_' .$button_count. '
 		</div>
 		<div class="actions width-4">
 			<a href="#" class="delete-button icon" title="Delete this button">
-				<i class="sss-fa sss-fa-times"></i>
+				<!-- <i class="sss-fa sss-fa-times"></i> -->
 			</a>
 		</div>
 	</div>
